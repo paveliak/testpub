@@ -1,0 +1,20 @@
+name: drives
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        win: [windows-latest, windows-2025]
+      fail-fast: false
+    runs-on: ${{ matrix.win }}
+    steps:
+      - name: check
+        shell: pwsh
+        run: |
+          write-host $Env:RUNNER_TEMP
+          get-childitem $Env:RUNNER_TEMP
+          Get-PSDrive -PSProvider 'FileSystem'  
+
